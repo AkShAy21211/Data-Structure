@@ -8,6 +8,5 @@ let factorial = (n) => {
     }
     return n * (factorial(n - 1));
 }
-
 // output 
 console.log(factorial(4));

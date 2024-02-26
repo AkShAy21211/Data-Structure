@@ -9,8 +9,8 @@ function reverseString(str){
         return '';
     }
 
-    return reverseString(str.substr(1))+str.charAt(0);
+    return reverseString(str.substring(1))+str.charAt(0);
 }
 
 
-console.log(reverseString(""));
+console.log(reverseString("akshay"));

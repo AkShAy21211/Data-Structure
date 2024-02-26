@@ -38,7 +38,7 @@ class LinkedList {
             let current = this.head;
             let output = "";
             while(current){
-                output += `${current.value},`;
+                output += `${current.value} `;
                 current = current.next;
             }
             console.log(output);
