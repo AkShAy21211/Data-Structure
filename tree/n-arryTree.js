@@ -21,5 +21,5 @@ let child2 = new TreeNode('child2');
 
 root.addChild(child1);
 root.addChild(child2);
-
+// root.removeChild(child1.value)
 console.log(root);

@@ -1,3 +1,4 @@
+
 class Graph {
     constructor() {
         this.adjacencyList = {};
@@ -53,6 +54,6 @@ graph.addVertex("C");
 graph.addEdge("A", "B");
 graph.addEdge("B", "C");
 
-graph.bfsTraversal("A");
+graph.bfsTraversal("C");
 
 graph.display()

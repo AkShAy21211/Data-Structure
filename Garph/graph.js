@@ -1,51 +1,79 @@
-// implementation of undirected graph
+class Graph{
 
-class Graph {
-    constructor() {
-        this.adjacencyList = {};
+    constructor(){
+        this.adjencyList = {};
     }
 
-    addVertices(vertext) {
-        if (!this.adjacencyList[vertext]) {
-            this.adjacencyList[vertext] = new Set();
+    addVertex(vertex){
+
+        if(!this.adjencyList[vertex]){
+
+            this.adjencyList[vertex] = new Set();
         }
+
     }
 
-    addEdge(vertex1, vertex2) {
-        if (!this.adjacencyList[vertex1]) {
-            this.addVertices(vertex1)
+    addEdge(v1,v2){
+
+        if(!this.adjencyList[v1]){
+
+            this.addVertex(v1);
         }
-        if (!this.adjacencyList[vertex2]) {
-            this.addVertices(vertex2)
+        
+        if(!this.adjencyList[v2]){
+
+            this.addVertex(v2);
         }
-        this.adjacencyList[vertex1].add(vertex2);
-        this.adjacencyList[vertex2].add(vertex1);
+
+        this.adjencyList[v1].add(v2);
+        this.adjencyList[v2].add(v1);
     }
 
-    hasEdge(vertex1, vertex2) {
-        return (
-            this.adjacencyList[vertex1].has(vertex2) &&
-            this.adjacencyList[vertex2].has(vertex1)
-        )
+
+    hasEdge(v1,v2){
+
+        return this.adjencyList[v1].has(v2)&&this.adjencyList[v2].has(v1);
     }
 
-    // display the adjacency list
     display(){
-        for(let vertex in this.adjacencyList){
-            console.log(vertex + '->' + [...this.adjacencyList[vertex]]);
+
+        for(const data in this.adjencyList){
+
+            console.log(data +'->',[...this.adjencyList[data]]);
         }
+    }
+
+    removeEdge(v1,v2){
+
+        this.adjencyList[v1].delete(v2);
+        this.adjencyList[v2].delete(v1);
+    }
+
+    removeVertex(vertex){
+
+        if(!this.adjencyList[vertex]){
+            return;
+        }
+
+        for(const adjecentVertex in this.adjencyList){
+
+            this.removeEdge(vertex,adjecentVertex)
+        }
+
+        delete this.adjencyList[vertex]
     }
 }
 
-let graph = new Graph();
+const graph = new Graph();
 
-graph.addVertices("A");
-graph.addVertices("B");
-graph.addVertices("C");
-
-graph.addEdge("A", "B");
-graph.addEdge("B", "C");
+graph.addVertex("A");
+graph.addVertex("B")
+graph.addVertex("C");
+graph.addEdge("A","B");
+graph.addEdge("B","C");
 
 graph.display();
 
-console.log(graph.hasEdge("A","C"));
+graph.removeEdge("A","B");
+console.log("...............");
+graph.display()

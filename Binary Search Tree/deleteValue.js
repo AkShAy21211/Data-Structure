@@ -95,4 +95,3 @@ bst.insert(5);
 bst.insert(3);
 // bst.inorderTraversal(bst.root)
 bst.delete(10);
-console.log(bst.root);

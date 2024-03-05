@@ -86,11 +86,25 @@ class MaxHeap {
     }
 }
 
-let heap = new MaxHeap();
-heap.add(10);
-heap.add(5);
-heap.add(15);
-heap.add(20);
-heap.extract();
+const arr = [6,1,2,10,4,8,13,11,30,22,15];
 
-heap.display();
+function heapSort(arr){
+
+    let heap = new MaxHeap();
+
+    for(let i=0; i<arr.length; i++){
+
+        heap.add(arr[i])
+    }
+
+    let result = [];
+
+    for(let i=0; i<arr.length; i++){
+
+        result.push(heap.extract())
+    }
+
+    return result;
+}
+
+console.log(heapSort(arr));

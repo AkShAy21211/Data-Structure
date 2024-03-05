@@ -49,33 +49,34 @@ class Graph {
         }
         delete this.adjacencyList[vertex]; //delete the vertex
     }
+
     hasCycle() {
-      const visited = new Set();
-      
-      const isCyclic = (vertex, parent) => {
+        const visited = new Set();
+    
+        const isCyclic = (vertex, parent) => {
           visited.add(vertex);
-          for (const neighbor of this.adjacencyList[vertex]) {
-              if (!visited.has(neighbor)) {
-                  if (isCyclic(neighbor, vertex)) {
-                      return true;
-                  }
-              } else if (neighbor !== parent) {
-                  return true;
+    
+          for (const neighbor of this.adjList[vertex]) {
+            if (!visited.has(neighbor)) {
+              if (isCyclic(neighbor, vertex)) {
+                return true;
               }
-          }
-  
-          return false;
-      };
-  
-      for (const vertex in this.adjacencyList) {
-          if (!visited.has(vertex) && isCyclic(vertex, null)) {
+            } else if (neighbor !== parent) {
               return true;
+            }
           }
+    
+          return false;
+        };
+    
+        for (const vertex in this.adjList) {
+          if (!visited.has(vertex) && isCyclic(vertex, null)) {
+            return true;
+          }
+        }
+    
+        return false;
       }
-  
-      return false;
-  }
-  
 }
 
 
@@ -87,9 +88,9 @@ graph.addVertices("C");
 
 graph.addEdge("A", "B");
 graph.addEdge("B", "C");
-graph.addEdge("C", "A");
-
+graph.removeEdge("A","B")
 graph.display();
 
-console.log(graph);
+
 console.log(graph.hasCycle());
+

@@ -45,54 +45,63 @@ class BST {
             return root;
         }
         if (value < root.data) {
-            this.deleteNode(root.left, value);
-        } else if (value > root.right) {
-            this.deleteNode(root.left, value);
+            root.left = this.deleteNode(root.left, value);
+        } else if (value > root.data) {
+            root.right = this.deleteNode(root.right, value);
         } else {
-            // when the value finds
+            // when the value is found
             if (!root.left && !root.right) {
                 // if the root has no children
                 return null;
             } else if (!root.right) {
-                return root.right
-            } else if (!root.left) {
+                // if only the left child exists
                 return root.left;
+            } else if (!root.left) {
+                // if only the right child exists
+                return root.right;
             } else {
                 // when the node has two children
-                // find replace the node with inorder succeessor
+                // find replace the node with inorder successor
                 // and delete it.
-                root.value = this.min(root.right);
-                root.right = this.deleteNode(root.right, root.value);
-
+                root.data = this.min(root.right);
+                root.right = this.deleteNode(root.right, root.data);
             }
         }
+        return root;
     }
+
     min(root) {
         if (!root.left) {
-            return root.value;
+            return root.data;
         } else {
             return this.min(root.left);
         }
     }
 
-    // function for checking is a Binary Tree or not;
-    isValid() {
-        if (!this.root) return null;
-        return this._isvalid(this.root, null, null);
-    }
-    _isvalid(root, min, max) {
-        if (!root) return true;
-        if (min !== null && root.data <= min) {
-            return false; // Violates min constraint
-        }
+    // function for checking if a Binary Tree is valid;
+   isValid(){
 
-        if (max !== null && root.data >= max) {
-            return false; // Violates max constraint
-        }
+    if(!this.root) return true;
 
-        // Recursively check subtrees with updated constraints
-        return this._isvalid(root.left, min, root.data) && this._isvalid(root.right, root.data, max);
+    return this._isValid(this.root,null,null);
+
+   }
+
+   _isValid(root,min,max){
+
+    if(!root) return true;
+
+    if(min !== null && root.value <= min){
+        return false;
     }
+    if(max !== null && root.value >= max){
+
+        return false;
+    }
+
+
+    return this._isValid(root.left,min,root.value) && this._isValid(root.right,root.value,max);
+   }
 
     inOrderTraversal(root) {
         if (root) {
@@ -101,13 +110,14 @@ class BST {
             this.inOrderTraversal(root.right);
         }
     }
-
 }
 
 let bst = new BST();
 bst.insert(10);
-bst.insert(12);
-bst.insert(17);
 bst.insert(5);
-bst.inOrderTraversal(bst.root)
-console.log(bst.isValid());
+bst.insert(12);
+bst.insert(8);
+
+
+bst.inOrderTraversal(bst.root);
+console.log(bst.isValid()); 

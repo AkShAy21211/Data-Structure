@@ -32,8 +32,6 @@ function heapify(arr, n, i) {
     if (largest !== i) {
         // Swap arr[i] and arr[largest]
         [arr[i], arr[largest]] = [arr[largest], arr[i]];
-
-        // Recursively heapify the affected sub-tree
         heapify(arr, n, largest);
     }
 }

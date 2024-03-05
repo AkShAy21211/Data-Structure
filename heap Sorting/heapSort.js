@@ -87,6 +87,7 @@ let arr = [4, 3, 1, 2, 5];
 
 const heapSort = (arr) => {
     let heap = new Heap();
+
     for(let i = 0 ; i< arr.length;i++){
         heap.add(arr[i]);
     }
@@ -98,4 +99,14 @@ const heapSort = (arr) => {
     return result;
 }
 
+function findKthLargest(arr, k) {
+    const sortedArray = heapSort([...arr]); // Make a copy to preserve the original array
+    return sortedArray[arr.length - k];
+  }
+  
+  // Example usage:
+  const arrayToSearch = [3, 1, 4, 2, 2, 6, 5];
+  const kValue = 3;
+  console.log(findKthLargest(arrayToSearch, kValue)); // Output: 4
+  
 console.log(heapSort(arr));

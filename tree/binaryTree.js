@@ -44,6 +44,16 @@ function inorderTraversal(root) {
     inorderTraversal(root.right);
 }
 
+function height(root){
+
+    if(!root) return 0;
+
+    const left = height(root.left);
+    const right = height(root.right);
+
+    return Math.max(left,right)+1;
+}
+
 function search(node, key) {
     if (!node) {
         return false;
@@ -72,3 +82,5 @@ postorderTaraversl(root);
 
 console.log("Inorder Traversal");
 inorderTraversal(root);
+
+console.log("Height ",height(root));

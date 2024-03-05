@@ -1,52 +1,49 @@
-class Node{
-
-    constructor(value){
-
-        this.value = value;
-        this.left = null;
-        this.right = null;
+class TreeNode {
+    constructor(value) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
     }
-}
-
-
-class BinarySearchTree{
-
-    constructor(){
-        this.root = null;
+  }
+  
+  function inorderTraversal(node) {
+    if (node !== null) {
+      inorderTraversal(node.left);
+      console.log(node.value);
+      inorderTraversal(node.right);
     }
-
-    isEmpty(){
-       return this.root === null;
-
+  }
+  
+  function preorderTraversal(node) {
+    if (node !== null) {
+      console.log(node.value);
+      preorderTraversal(node.left);
+      preorderTraversal(node.right);
     }
-
-
-    insert(value){
-
-        const node  = new Node(value);
-        if(this.isEmpty()){
-            this.root = value;
-        }else{
-            this.inserNoe(this.root,value);
-        }
-
+  }
+  
+  function postorderTraversal(node) {
+    if (node !== null) {
+      postorderTraversal(node.left);
+      postorderTraversal(node.right);
+      console.log(node.value);
     }
-
-    inserNoe(root,value){
-
-        if(node.value<root.value){
-            if(root.left === null){
-                root.left = node;
-            }else{
-                this.inserNoe(root.left,value);
-            }
-            
-        }else{
-            if(root.right === null){
-                root.right = node;
-            }else{
-                this.inserNoe(root.right,node)
-            }
-        }
-    }
-}
+  }
+  
+  // Create a sample binary tree
+  const root = new TreeNode(1);
+  root.left = new TreeNode(2);
+  root.right = new TreeNode(3);
+  root.left.left = new TreeNode(4);
+  root.left.right = new TreeNode(5);
+  
+  // Perform traversals
+  console.log("Inorder Traversal:");
+  inorderTraversal(root);
+  
+  console.log("\nPreorder Traversal:");
+  preorderTraversal(root);
+  
+  console.log("\nPostorder Traversal:");
+  postorderTraversal(root);
+  
