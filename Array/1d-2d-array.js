@@ -29,6 +29,7 @@ function get2DArray() {
 
         array2D.push(row);
     }
+    
 
     return array2D;
 }

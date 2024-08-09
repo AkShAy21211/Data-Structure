@@ -1,7 +1,7 @@
 // merge two sorted array;
 /**
  * you are given two arrays, one wiith sorted in asscending order one with descending order merge two in ascending.
- */
+*/
 
 let arr1 = [10, 20, 30];
 let arr2 = [35, 25, 15];

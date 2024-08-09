@@ -6,28 +6,19 @@
 // hybrid sorting
 // let array = [5,4,2,1,3];
 
-const insertion = (arr)=>{
+const insertion = (arr) => {
+  for (let i = 1; i < arr.length; i++) {
+    let element = arr[i];
+    let j = i - 1;
+    while (j >= 0 && arr[j] > element) {
+      arr[j + 1] = arr[j];
+      j--;
 
-    for(let i=1; i<arr.length; i++){
-        let element = arr[i];
-        let j = i-1;
-        while(j>=0 && arr[j]>element){
-
-            if(arr[j]>arr[j+1]){
-
-              arr[j+1] = arr[j];
-              j--;
-            }
-
-            arr[j+1] = element;
-        }
-        
+      arr[j + 1] = element;
     }
-    return arr;
-
-}
-
-
+  }
+  return arr;
+};
 
 // const insertionSort = (arr) => {
 //     for (i = 0; i < arr.length - 1; i++) {
@@ -45,6 +36,6 @@ const insertion = (arr)=>{
 //     return arr;
 // }
 
-let array = [5,4,2,1,3];
+let array = [5, 4, 2, 1, 3];
 
-console.log("while loop",insertion(array))
+console.log("while loop", insertion(array));

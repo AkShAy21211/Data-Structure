@@ -23,4 +23,4 @@ const findKey = (arr, key) => {
 
     return -1;
 }
-console.log(findKey(array, key));// the time complexity of the problem is O(log n)
+console.log(findKey(array, key));

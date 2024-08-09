@@ -7,9 +7,9 @@ const mergeSort = (arr)=>{
     if(arr.length<=1){
         return arr;
     }
-    let mid = parseInt(arr.length / 2);
+    let mid =arr.length / 2;
     let left = mergeSort(arr.slice(0,mid));
-    let right = mergeSort(arr.slice(mid,arr.length));
+    let right = mergeSort(arr.slice(mid));
 
     return merge(left,right);
 }
@@ -23,7 +23,6 @@ const merge = (left,right)=>{
     while(i<left.length && j<right.length){
 
         if(left[i]<right[j]){
-
             sortArray[k] = left[i];
             i++;
         }else{
@@ -51,7 +50,7 @@ const merge = (left,right)=>{
     }
 
 
-    return sortArray;
+    return   ;
 
 }
 
