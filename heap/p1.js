@@ -38,6 +38,5 @@ const arr = [2,4,8,12,33,55];
 console.log(findMax(arr));
 
 
-const arr2 = [2,4,8,12,33,55];
 
 console.log(findMin(arr.reverse()));

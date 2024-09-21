@@ -1,83 +1,89 @@
-class Node{
-
-  constructor(){
-    this.children ={};
+class TrieNode {
+  constructor() {
+    this.children = {};
     this.end = false;
   }
-
 }
 
-class Trie{
-  constructor(){
-
-    this.root = new Node();
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
   }
 
-  insert(word){
-
-    let node  = this.root;
-
-    for(let char of word){
-      if(!node.children[char]){
-
-        node.children[char] = new Node()
-      }
-
-      node = node.children[char];
-    }
-
-    node.end = true
-  }
-
-
-  search(word){
-
-    let node  = this.root;
-
-    for(const char of word){
-
-      if(!node.children[char]){
-
-        return false;
-      }
-
-      node = node.children[char];
-    }
-    return node.end;
-  }
-
-  getWord(prefix){
-
+  insert(word) {
     let node = this.root;
-    for(const char of prefix){
-      if(!node.children[char]){
+
+    for (const child of word) {
+      if (!node.children[child]) {
+        node.children[child] = new TrieNode();
+      }
+
+      node = node.children[child];
+    }
+    node.end = true;
+  }
+
+  getWord(prefix) {
+    let node = this.root;
+    for (const child of prefix) {
+      if (!node.children[child]) {
         return [];
       }
-
-      node = node.children[char];
+      node = node.children[child];
     }
-
-   return  this.getAllWords(node,prefix);
+    return this.getAllWords(node, prefix);
   }
 
-  getAllWords(node,current){
+  getAllWords(node, prefix) {
+    let words = [];
 
-    let word = [];
-
-    if(node.end){
-      word.push(current)
+    if (node.end) {
+      words.push(prefix);
     }
 
-    for(const char in node.children){
-
-      word.push(...this.getAllWords(node.children[char],current+char))
-
+    for (const char in node.children) {
+      words.push(...this.getAllWords(node.children[char], prefix + char));
     }
 
-    return word;
+    return words;
+  }
+
+  delete(word){
+
+    this.deleteRecursive(word,this.root,0);
+  }
+
+
+  deleteRecursive(node,word,index){
+
+    if(!node){
+      return false;
+    }
+    if(index === word.length){
+
+      if(!node.end){
+
+        return false
+      }
+
+      node.end = false;
+
+      return Object.keys(node.children).length===0;
+    }
+
+    const char = word[index];
+    const nextNode = node.children[char];
+
+    if(!nextNode) return false;
+
+    const shouldDeleteCurrentNode = this.deleteRecursive(nextNode, word, index + 1);
+    if(shouldDeleteCurrentNode){
+      delete node.children[char];
+      return Object.keys(node.children).length === 0;
+    }
+    return false;
   }
 }
-
   // Example usage
   const trie = new Trie();
   const words = ["apple", "apricot", "banana", "orange", "pear", "peach"];
@@ -86,11 +92,5 @@ class Trie{
   for (const word of words) {
     trie.insert(word);
   }
-  
 
-  // Test autocomplete function
-  const prefix = "b";
-
-  console.log(trie.search("apple"));
-  console.log(`Autocomplete suggestions for "${prefix}":`, trie.getWord(prefix));
-  
+  console.log(trie.getWord('app'))
