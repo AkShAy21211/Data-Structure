@@ -211,9 +211,10 @@ class BST{
 }
 
 
+
+debugger;
 const bst = new BST();
 
-  
 bst.insert(10)
   
 bst.insert(15)

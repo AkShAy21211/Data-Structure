@@ -3,7 +3,7 @@
 function subset(){
 
     let result = [];
-    let = temp = [];
+    let temp = [];
 
 
     function recursive(num,i){

@@ -56,4 +56,3 @@ graph.addEdge("B", "C");
 
 graph.bfsTraversal("C");
 
-graph.display()

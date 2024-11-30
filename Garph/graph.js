@@ -74,6 +74,3 @@ graph.addEdge("B","C");
 
 graph.display();
 
-graph.removeEdge("A","B");
-console.log("...............");
-graph.display()

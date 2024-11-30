@@ -34,6 +34,8 @@ function get2DArray() {
     return array2D;
 }
 
+
+
 // Function to display a 2D array in matrix shape
 function displayMatrix(array2D) {
     for (let i = 0; i < array2D.length; i++) {

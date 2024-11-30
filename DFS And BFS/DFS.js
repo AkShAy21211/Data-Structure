@@ -42,6 +42,26 @@ class Graph {
             }
         }
     }
+
+    bfs(start){
+        const visited = new Set();
+        visited.add(start);
+        let queue = [start];
+
+        while(queue.length>0){
+            let vertex = queue.shift();
+            let adj = this.list[vertex];
+            console.log(vertex);
+            for(let neighbor of adj){
+                if(!visited.has(neighbor)){
+                    visited.add(neighbor);
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+
+
 }
 
 let graph = new Graph();
@@ -52,3 +72,4 @@ graph.addVertex("C");
 graph.addEdge("A", "B");
 graph.addEdge("B", "C");
 graph.dfsRecursive("A")
+graph.bfs("A");

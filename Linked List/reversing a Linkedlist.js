@@ -72,10 +72,26 @@ class LinkedList {
       let next = current.next;
       current.next = prev;
       prev = current;
-      current = next;;
+      current = next;
     }
 
     this.head = prev
+  }
+
+  reverse(){
+
+    let prev = null
+    let current = this.head;
+
+    while(current){
+
+      let next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+
+    }
+    this.head = prev;
   }
 }
 
@@ -88,3 +104,4 @@ list.append(50);
 
 list.reverse();
 list.print();
+

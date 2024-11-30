@@ -5,6 +5,7 @@ class Node {
   }
 }
 
+debugger
 class LinkedList {
   constructor() {
     this.head = null;
@@ -17,6 +18,7 @@ class LinkedList {
 
   getSize() {
     return this.size;
+    
   }
 
   prepend(value) {
@@ -96,6 +98,7 @@ class LinkedList {
     }
   }
 }
+
 
 const list = new LinkedList();
 

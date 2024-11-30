@@ -13,12 +13,15 @@ class LinkedList {
         this.head = null;
         this.size = 0;
     }
+    
     isEmpty() {
         return this.size == 0;
     }
+    
     getSize() {
         return this.size;
     }
+
     prepend(value) {
         let node = new Node(value);
         if (this.isEmpty()) {
@@ -29,6 +32,7 @@ class LinkedList {
         }
         this.size++;
     }
+
     append(value) {
         let node = new Node(value);
         if (this.isEmpty()) {

@@ -36,7 +36,6 @@ class BinarySearchTree {
         }
 
     }
-
     search(root, key) {
         if (!root) {
             return false;

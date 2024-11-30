@@ -1,42 +1,75 @@
-class Graph{
+class Graph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+    addVertex(vertex) {
+        if (!this.adjacencyList[vertex]) {
+            this.adjacencyList[vertex] = new Set();
+        }
+    }
+    addEdge(vertex1, vertex2) {
+        if (!this.adjacencyList[vertex1]) {
+            this.addVertex(vertex1)
+        }
+        if (!this.adjacencyList[vertex2]) {
+            this.addVertex(vertex2)
+        }
 
-    constructor(){
-
-        this.adjencyList ={};
+        this.adjacencyList[vertex1].add(vertex2);
+        this.adjacencyList[vertex2].add(vertex1);
     }
 
-    addVertex(vertex){
+    hasEdge(vertex1, vertex2) {
+        return (this.adjacencyList[vertex1].has(vertex2) &&
+            this.adjacencyList[vertex2].has(vertex1));
+    }
 
-        if(!this.adjencyList[vertex]){
-
-            this.adjencyList[vertex] = new Set();
+    display() {
+        for (let vertex in this.adjacencyList) {
+            console.log(vertex + "->" + [...this.adjacencyList[vertex]])
         }
     }
 
-    addEdge(v1,v2){
+    dfsRecursive(vertex, visited = new Set()) {
+        visited.add(vertex);
+        console.log(vertex);
 
-        if(!this.adjencyList[v1]){
+        let adjacentVertices = this.adjacencyList[vertex];
 
-            this.addVertex(v1)
-        }
-        if(!this.adjencyList[v2]){
-            this.addVertex(v2)
-        }
-
-        this.adjencyList[v1].add(v2);
-        this.adjencyList[v2].add(v1);
-    }
-
-       hasEdge(v1,v2){
-
-        return this.adjencyList[v1].has(v2)&&this.adjencyList[v2].has(v1);
-    }
-      display(){
-
-        for(const data in this.adjencyList){
-
-            console.log(data +'->',[...this.adjencyList[data]]);
+        for (const adj of adjacentVertices) {
+            if (!visited.has(adj)) {
+                this.dfsRecursive(adj, visited);
+            }
         }
     }
+
+    bfs(start){
+        const visited = new Set();
+        visited.add(start);
+        let queue = [start];
+
+        while(queue.length>0){
+            let vertex = queue.shift();
+            let adj = this.list[vertex];
+            console.log(vertex);
+            for(let neighbor of adj){
+                if(!visited.has(neighbor)){
+                    visited.add(neighbor);
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+
 
 }
+
+let graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+
+graph.addEdge("A", "B");
+graph.addEdge("B", "C");
+graph.dfsRecursive("A")
+graph.bfs("A");
