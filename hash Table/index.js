@@ -60,7 +60,7 @@ class HashTable {
     }
   }
 }
-
+debugger;
 const hashTable = new HashTable(100);
 
 hashTable.set("name", "John");
