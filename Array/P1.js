@@ -10,7 +10,7 @@ function findTarget(array, target) {
     for (let i = 0; i < array.length - 1; i++) {
         for (let j = i + 1; j < array.length; j++) {
             if (array[i] + array[j] === target) {
-                return new Array(array[i], array[j]);
+                return [array[i], array[j]]
             }
         }
     }

@@ -27,4 +27,4 @@ const largestNumber1 = (arr) => {
     }
     return [num1, num2, num3];
 }
-console.log(largestNumber(array));
+console.log(largestNumber1(array));

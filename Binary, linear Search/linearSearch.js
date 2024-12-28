@@ -18,4 +18,23 @@ function findKey2(arr, key) {
   return index !== -1 ? index+1 : -1;
 }
 
+
+//complexity
+//time complexity: o(n)
+
+//advantages of linear search
+
+// 1. It's simple and easy to implement.
+// 2. It's suitable for small data sets.
+// 3. It's efficient for searching items that are in a sorted array.
+
+//disadvantages of linear search
+
+// 1. It's not efficient for searching items that are not in the array.
+// 2. It requires the array to be sorted for efficient searching.
+
+
+
+
+
 console.log(findKey2(array, key));

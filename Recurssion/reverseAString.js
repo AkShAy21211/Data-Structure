@@ -9,7 +9,6 @@ function reverseString(str){
         return '';
     }
 
-    console.log(str);
     
 
     return reverseString(str.substring(1))+str.charAt(0);

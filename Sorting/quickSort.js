@@ -1,27 +1,26 @@
 // quck sort 
 // complexity is worst casse O(n), best case is O(n log n)
 
-const quick = (arr)=>{
+// Quick Sort selects a "pivot" element, partitions the array around the pivot (smaller elements on one side, 
+// larger on the other), and recursively sorts the subarrays.
 
-    if(arr.length<=1){
-        return arr;
-    }
-    let left = [];
-    let right = [];
-    let pivot = arr[0];
 
-    for(let i=1; i<arr.length; i++){
+const quickSort = (arr)=>{
 
-        if(arr[i]<pivot){
+  if(arr.length<=1) return arr;
 
-            left.push(arr[i]);
-        }else{
+  let left =[];
+  let right = [];
+  let pivot = arr[0];
 
-            right.push(arr[i]);
-        }
-    }
 
-    return [...quick(left),pivot,...quick(right)];
+  for(let i=1; i<arr.length; i++){
+
+    if(arr[i]<pivot) left.push(arr[i]);
+    else right.push(arr[i]);
+  }
+
+  return [...quickSort(left),pivot,...quickSort(right)]
 }
 
 
@@ -30,4 +29,4 @@ let arr = [3,2,1,4,5,-6,-4,-10,0,-2,11,15];
 
 
 
-console.log(quick(arr));
+console.log(quickSort(arr));

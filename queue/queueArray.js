@@ -11,7 +11,7 @@ class Queue {
         return this.elements.shift();
     }
 
-    peak() {
+    front() {
         return this.elements[0];
     }
 

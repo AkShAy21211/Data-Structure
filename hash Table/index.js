@@ -5,11 +5,11 @@ class HashTable {
   }
 
   hash(key) {
-    let total = 0;
+    let index = 0;
     for (let i = 0; i < key.length; i++) {
-      total += key.charCodeAt(i);
+      index += key.charCodeAt(i);
     }
-    return total % this.size;
+    return index % this.size;
   }
 
   set(key, value) {

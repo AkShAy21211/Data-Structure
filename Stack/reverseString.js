@@ -1,37 +1,11 @@
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
-}
+const {Stack}  = require("./stack-using-linked-list");
 
-class Stack {
-    constructor() {
-        this.top = null;
-        this.size = 0;
-    }
+// reverse a string using stack
 
-    push(value) {
-        let node = new Node(value);
-        if (!this.top) {
-            this.top = node;
-        } else {
-            node.next = this.top;
-            this.top = node;
-        }
-    }
 
-    pop(){
-        if(!this.top) return "stcak underflow";
-        let value = this.top.data;
-        this.top = this.top.next;
-        return value;
-    }
-}
 
-const reverse = (str) => {
+const reverse = (str,stack) => {
     let string = str.split("");
-    let stack = new Stack();
     for(let i = 0; i < string.length; i++){
         stack.push(string[i]);
     }
@@ -45,4 +19,5 @@ const reverse = (str) => {
 }
 
 let string = "dlrow olleh";
-console.log(reverse(string));
+const stack = new  Stack();
+console.log(reverse(string,stack));

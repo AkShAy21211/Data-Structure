@@ -1,4 +1,7 @@
+// Time Complexity: 𝑂(nlogn)
+
 function mergeSort(arr) {
+  debugger;
   if (arr.length <= 1) return arr;
 
   const mid = Math.floor(arr.length / 2);
@@ -36,10 +39,6 @@ function merge(left, right) {
   return result;
 }
 
-
-
-
 // Testing the function
 const arr = [5, 3, 8, 2, 1, 9, 4, 6, 7];
-console.log('Unsorted array:', arr);
-console.log('Sorted array:', mergeSort(arr));
+console.log("Sorted array:", mergeSort(arr));

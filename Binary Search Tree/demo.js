@@ -86,7 +86,7 @@ class BST{
 
                 root.left = this.deleteNode(root.left,value);
 
-        }else if(value >  root.value){
+        }else if(value >  root.right){
 
             root.right = this.deleteNode(root.right,value);
         }else{

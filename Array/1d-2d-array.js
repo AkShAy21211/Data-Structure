@@ -1,5 +1,4 @@
 const readlineSync = require('readline-sync');
-
 // Function to get user input for a 1D array
 function get1DArray() {
     const length = readlineSync.question('Enter the length of the 1D array: ');
@@ -39,13 +38,13 @@ function get2DArray() {
 // Function to display a 2D array in matrix shape
 function displayMatrix(array2D) {
     for (let i = 0; i < array2D.length; i++) {
-        console.log(array2D[i].join('\t'));
+        console.log(array2D[i]);
     }
 }
 
 // Example usage
-const my1DArray = get1DArray();
-console.log('1D Array:', my1DArray);
+// const my1DArray = get1DArray();
+// console.log('1D Array:', my1DArray);
 
 const my2DArray = get2DArray();
 console.log('2D Array:');
