@@ -35,8 +35,8 @@ const twosum = (arr,target)=>{
 const twoSum = (nums, target) => {
     const numIndices = new Map(); 
     for (let i = 0; i < nums.length; i++) {
-        const currentNum = nums[i];
-        const complement = target - currentNum;
+        let  currentNum = nums[i];
+        let complement = target - currentNum;
 
         if (numIndices.has(complement)) {
             return [nums[numIndices.get(complement)], nums[i]];

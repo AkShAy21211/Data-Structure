@@ -1,80 +1,77 @@
-class Stack{
+class Node {
+  constructor(val) {
+    this.data = val;
+    this.next = null;
+  }
+}
+class List {
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
 
-    constructor(){
+  isEpmty() {
+    return this.size === 0;
+  }
 
-        this.stack = [];
-        this.size = 0;
-        this.top = null;
+  append(val) {
+    const node = new Node(val);
+    if (this.isEpmty()) {
+      this.head = node;
+    } else {
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = node;
     }
+    this.size++;
+  }
 
-
-    push(value){
-
-            this.stack.push(value);
-            this.top = value;
-            this.size++;
-        
-
+  prepend(val) {
+    const node = new Node(val);
+    if (this.isEpmty()) {
+      this.head = node;
+    } else {
+      node.next = this.head;
+      this.head = node;
     }
-    pop(){
+    this.size++;
+  }
 
-        let popValue ;
+  reverse() {
+    let current = this.head;
+    let prev = null;
 
-        if(this.isEmpty()){
-
-            return "Stack is empty"
-        }else{
-            if(this.size>1){
-                
-                popValue = this.top;
-                this.top = this.stack[this.size - 2];
-
-            }else{
-                popValue = this.top;
-                this.top = null;
-            }
-
-            this.size--;
-        }
-
-        return popValue
-
-      
+    while (current) {
+      let next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
     }
+  
+    this.head = prev
+  }
+  print() {
+    let output = "";
+    let current = this.head;
 
-    peek(){
-        if(this.isEmpty()){
-
-            return "Stack is empty";
-        }
-
-        return this.top;
-
-
+    while (current) {
+      output += current.data + " -> ";
+      current = current.next;
     }
-
-    print(){
-
-        if(this.isEmpty()) return "Stach is empty";
-        let value = "";
-        for(let i=0; i<this.size; i++){
-
-            value+= this.stack[i]+ " ";
-        }
-
-        return value;
-    }
-
-    isEmpty(){
-
-        return this.size === 0 ;
-    }
-
-
+    return output;
+  }
 }
 
-const stack  = new Stack();
-stack.push(10);
-stack.push(40);
-stack.push(100)
+// Example usage
 
+const myList = new List();
+myList.append(1);
+myList.append(2);
+myList.append(3);
+
+console.log(myList.print()); // Output: 1 -> 2 -> 3 ->
+
+myList.reverse();
+console.log(myList.print()); // Output: 3 -> 2 -> 1 ->

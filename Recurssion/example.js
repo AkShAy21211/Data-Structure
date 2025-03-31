@@ -16,12 +16,8 @@ const factorialRecursive = (n) => {
   return n == 0 ? 1 : n * factorialRecursive(n - 1);
 };
 
-console.log(factorialRecursive(0)); // Outputs: 120
-
-
-function reverse([head,...tail]){
-
-    return tail.length?[...reverse(tail),head]:[head]
+function reverse([head, ...tail]) {
+  return tail.length ? [...reverse(tail), head] : [head];
 }
 
-console.log(reverse([1,2,3])); // Outputs: [5,4,3,2,1]
+// console.log(reverse([1,2,3])); // Outputs: [5,4,3,2,1]function reverse([head, ...tail]: [any, ...any[]]): anyconsole.log(factorialRecursive(0)); // Outputs: 120

@@ -1,0 +1,30 @@
+string_methods = """
+JavaScript String Methods:
+
+1. charAt() - Returns the character at a specified index.
+2. charCodeAt() - Returns the Unicode value of the character at a specified index.
+3. concat() - Joins two or more strings.
+4. includes() - Checks if a string contains a specified substring.
+5. indexOf() - Returns the first index of a specified substring.
+6. lastIndexOf() - Returns the last index of a specified substring.
+7. slice() - Extracts a part of a string and returns a new string.
+8. substring() - Returns a part of a string between two specified indices.
+9. toLowerCase() - Converts a string to lowercase.
+10. toUpperCase() - Converts a string to uppercase.
+11. trim() - Removes whitespace from both ends of a string.
+12. split() - Splits a string into an array of substrings.
+13. replace() - Replaces a specified substring with a new substring.
+14. match() - Searches a string for a match against a regular expression.
+15. search() - Tests for a match in a string and returns the position of the match.
+16. repeat() - Returns a new string that repeats the original string a specified number of times.
+17. trimStart() - Removes whitespace from the beginning of a string.
+18. trimEnd() - Removes whitespace from the end of a string.
+19. includes() - Checks if a string contains a given substring.
+20. startsWith() - Tests if a string starts with a given substring.
+21. endsWith() - Tests if a string ends with a given substring.
+22. padStart() - Pads the current string with another string until it reaches the specified length.
+23. padEnd() - Pads the current string with another string until it reaches the specified length.
+24. localeCompare() - Compares two strings in the current locale.
+25. normalize() - Returns a normalized version of a string.
+26. fromCharCode() - Returns a string created from the sequence of Unicode values.
+"""

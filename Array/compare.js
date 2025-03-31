@@ -25,5 +25,3 @@ function isPalindrome(arr){
 
         return true;
 }
-
-0

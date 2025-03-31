@@ -1,7 +1,7 @@
 const { NodeList } = require("./index.js");
 
 const isPallindrome = (head) => {
-  let string1 = (string2 = "");
+  let string1 = string2 = "";
   let node = head;
 
   while (node !== null) {
