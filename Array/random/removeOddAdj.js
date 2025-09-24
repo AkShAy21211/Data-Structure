@@ -12,8 +12,6 @@ function removeAdjacentOdds(arr) {
             arr[writeIndex] = arr[i];
             writeIndex++;
         }
-
-        console.log(arr);
         
     }
 

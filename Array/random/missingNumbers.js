@@ -12,16 +12,13 @@ function findMissingNumbers(arr) {
   }
 }
 
-function findMissingNumbers2(arr){
+function findMissingNumbers2(arr) {
+  let n = arr.length + 1;
+  let sum = (n * (n + 1)) / 2;
+  let totalSum = arr.reduce((sum, curr) => sum + curr, 0);
 
-    let n = arr.length+1;
-    let sum = (n * (n + 1)) / 2;
-    let totalSum = arr.reduce((sum,curr)=>sum+curr,0);
-
-    return sum - totalSum;
+  return sum - totalSum;
 }
-
-
 
 console.log(findMissingNumbers([1, 2, 3, 4, 5, 7, 8, 9, 10])); // Output: 6
 

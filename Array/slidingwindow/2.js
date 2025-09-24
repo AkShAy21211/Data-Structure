@@ -9,7 +9,6 @@
 // 4. Keep track of the maximum length of valid substrings found.
 // 5. Return the maximum length.
 
-
 // time and space completely
 // O(n^2) and O(n) respectively
 

@@ -36,7 +36,6 @@ console.log(findMaxBruteForce([2, 1, 5, 1, 3, 2], 3)); // Output: 9
 // 3. When the window size exceeds k, subtract the leftmost element from the sum and move the left pointer to the right.
 // 4. Keep track of the maximum sum found during this process.
 // 5. Return the maximum sum.
-
 // 6. Time complexity: O(n), Space complexity: O(1)
 
 function findMax(arr, k) {

@@ -6,8 +6,7 @@ function isValidParentheses(s) {
       if (bracketPairs[char]) {
         stack.push(char);
       } else {
-        const top = stack.pop();
-        if (bracketPairs[top] !== char) {
+        if (bracketPairs[stack.pop()] !== char) {
           return "unbalanced";
         }
       }

@@ -35,3 +35,20 @@ const cloned = deepClone(original);
 console.log(cloned); // Deep cloned object
 console.log(cloned === original); // false
 console.log(cloned.address === original.address); // false
+
+
+function deepClone(obj){
+    if(obj === null || typeof obj !== 'object'){
+        return obj;
+    }
+
+    const clone = Array.isArray(obj) ? [] : {};
+
+    for(const key in obj){
+    
+        if(obj.hasOwnProperty(key)){
+            clone[key] = deepClone(obj[key]);
+        }
+    }
+    return clone;
+}

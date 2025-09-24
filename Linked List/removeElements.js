@@ -12,3 +12,15 @@ function removeElements(head, val) {
 
   return dummy.next; // Return the new head (which may have changed)
 }
+
+function removeDuplicates(head) {
+  let current = head;
+  while (current && current.next) {
+    if (current.data === current.next.data) {
+      current.next = current.next.next;
+    } else {
+      current = current.next;
+    }
+  }
+  return head;
+}

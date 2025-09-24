@@ -1,6 +1,6 @@
 function rotateMatrix(matrix) {
   const n = matrix.length;
-  const newrotatedMatrix = Array.from({ length: matrix.length }, () =>
+  const newrotatedMatrix = Array.from({ length: n }, () =>
     Array(n).fill(0)
   );
 

@@ -1,6 +1,5 @@
 // Q. Problem: Given two strings s and p, return an array of start indices where p's anagram is found in s.
 
-
 /*********brute force approach***********/
 
 // 1. Iterate through the string s with a window of size equal to the length of p.
