@@ -1,44 +1,39 @@
-// Time Complexity: 𝑂(nlogn)
-
 function mergeSort(arr) {
-  debugger;
   if (arr.length <= 1) return arr;
 
-  const mid = Math.floor(arr.length / 2);
-  const left = mergeSort(arr.slice(0, mid));
-  const right = mergeSort(arr.slice(mid));
+  let mid = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, mid));
+  let right = mergeSort(arr.slice(mid));
 
   return merge(left, right);
 }
 
 function merge(left, right) {
-  let result = [];
-  let i = 0;
-  let j = 0;
+  let i = 0,
+    j = 0;
+  let sortedArray = [];
 
-  while (i < right.length && j < left.length) {
+  while (i < left.length && j < right.length) {
     if (left[i] < right[j]) {
-      result.push(left[i]);
+      sortedArray.push(left[i]);
       i++;
     } else {
-      result.push(right[j]);
+      sortedArray.push(right[j]);
       j++;
     }
   }
-
   while (i < left.length) {
-    result.push(left[i]);
+    sortedArray.push(left[i]);
     i++;
   }
-
   while (j < right.length) {
-    result.push(right[j]);
+    sortedArray.push(right[j]);
     j++;
   }
-
-  return result;
+  return sortedArray;
 }
 
-// Testing the function
-const arr = [5, 3, 8, 2, 1, 9, 4, 6, 7];
-console.log("Sorted array:", mergeSort(arr));
+const array = [38, 27, 43, 3, 9, 82, 10];
+console.log("Unsorted Array:", array);
+const sortedArray = mergeSort(array);
+console.log("Sorted Array:", sortedArray);

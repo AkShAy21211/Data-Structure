@@ -57,7 +57,11 @@ class Trie {
       return false; // Word not found
     }
 
-    const shouldDeleteCurrentNode = this._deleteRecursive(nextNode, word, index + 1);
+    const shouldDeleteCurrentNode = this._deleteRecursive(
+      nextNode,
+      word,
+      index + 1
+    );
 
     if (shouldDeleteCurrentNode) {
       delete node.children[char];

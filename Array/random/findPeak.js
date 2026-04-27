@@ -1,33 +1,35 @@
-function findPeaks(array) {
-  if (array.length <= 1) return [];
-
-  let peak = array[0];
+function findPeaks(arr) {
+  const N = arr.length;
+  let peak = arr[0];
   let index = 0;
-  let output = [];
+  const output = [];
 
-  for (let x = 1; x < array.length; x++) {
-    // Check if signs of consecutive elements match
-    if (array[x] * array[x - 1] > 0) {
-      if (array[x] > peak) {
-        peak = array[x];
+  for (let x = 1; x < N; x++) {
+    if (arr[x] * arr[x - 1] > 0) {
+      // same sign
+      if (peak < 0 && arr[x] < peak) {
+        peak = arr[x];
+        index = x;
+      } else if (peak >= 0 && arr[x] > peak) {
+        peak = arr[x];
         index = x;
       }
     } else {
-      // Push the current peak when the sign changes
+      // sign changed
       output.push([index, peak]);
-      peak = array[x];
+      peak = arr[x];
       index = x;
     }
   }
 
-  // Push the last peak after exiting the loop
-  output.push([index, peak]);
-
+  output.push([index, peak]); // push last run summary
   return output;
 }
 
+
+
 // Example usage:
-const array = [1, 4, 2, -2, -9, 10, 2, 12, 2, -4, -4, -4, -4, 2, 6, 7];
+const array = [1, 4, 2, -2, -9, 10, 2, 12, 2, 6, 8, 9, -4, -4, -4, 7];
 console.log(findPeaks(array));
 // Output: [[1, 4], [4, -9], [7, 12], [9, -4], [15, 7]]
 
@@ -47,3 +49,7 @@ console.log(findPeaks(array));
 
 // Output:
 // The output array keeps track of the index and peak value for each segment where the sign of the numbers changes, capturing the highest point in sequences of numbers that share the same sign.
+// what is the edge case of this code?
+// Edge Case: If the input array has one or no elements, the function returns an empty array since there are no peaks to identify.
+// only one edge case?
+// Yes, the primary edge case handled in this code is when the input array has one or no elements. In such cases, there are no peaks to identify, and the function appropriately returns an empty array. Other potential edge cases, such as arrays with all positive or all negative numbers, are inherently managed by the logic of the function, which will simply return the peak of the entire array in those scenarios.

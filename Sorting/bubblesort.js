@@ -4,7 +4,7 @@ const bubble = (arr) => {
   do {
     swap = false;
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] > arr[i + 1]) {
         let temp = arr[i];
         arr[i] = arr[i + 1];
@@ -16,6 +16,23 @@ const bubble = (arr) => {
 
   return arr;
 };
+
+// another way using for loop
+ 
+function bubbleSort(arr) {
+  let n = arr.length;
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        // Swap arr[j] and arr[j+1]
+        let temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+}
 
 
 // Bubble Sort is a comparison-based sorting algorithm that works by repeatedly swapping adjacent elements if they are in the wrong order. The worst-case and average-case time complexity of Bubble Sort is 

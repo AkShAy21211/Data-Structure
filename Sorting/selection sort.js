@@ -1,19 +1,35 @@
+let arr = [5, 8, 9, 2, 1, 4, 3, 6, 7];
 
-let arr = [5,8,9,2,1,4,3,6,7];
+const selectionSort1 = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+  }
 
-const selectionSort = (arr) => {
+  return arr;
+};
 
-   for(let i=0; i<arr.length; i++){
-    for(let j=i+1; j<arr.length; j++){
-        if(arr[i]>arr[j]){
-            let temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-       }
-   }
+const selectionSort2 = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    let minIdx = i;
 
-    return arr
-}
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[minIdx]) {
+        minIdx = j;
+      }
+    }
 
-console.log(selectionSort(arr))
+    if (minIdx !== i) {
+      [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+    }
+  }
+
+  return arr;
+};
+
+console.log(selectionSort(arr));

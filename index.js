@@ -1,77 +1,34 @@
-class Node {
-  constructor(val) {
-    this.data = val;
-    this.next = null;
-  }
-}
-class List {
-  constructor() {
-    this.head = null;
-    this.size = 0;
-  }
+const user = { name: "Alice", age: 22, city: "Kannur" };
 
-  isEpmty() {
-    return this.size === 0;
-  }
-
-  append(val) {
-    const node = new Node(val);
-    if (this.isEpmty()) {
-      this.head = node;
-    } else {
-      let current = this.head;
-      while (current.next) {
-        current = current.next;
-      }
-      current.next = node;
+const handler = {
+  get(target, prop, receiver) {
+    console.log(`Accessed ${String(prop)}: ${target[prop]}`);
+    return Reflect.get(target, prop, receiver);
+  },
+  set(target, prop, value, receiver) {
+    if (prop === 'age' && typeof value !== 'number') {
+      console.error(`Error: Age must be a number. Received: ${value}`);
+      return false;
     }
-    this.size++;
-  }
+    console.log(`Setting ${String(prop)} = ${value}`);
+    return Reflect.set(target, prop, value, receiver);
+  },
+};
 
-  prepend(val) {
-    const node = new Node(val);
-    if (this.isEpmty()) {
-      this.head = node;
-    } else {
-      node.next = this.head;
-      this.head = node;
-    }
-    this.size++;
-  }
+const proxyUser = new Proxy(user, handler);
 
-  reverse() {
-    let current = this.head;
-    let prev = null;
+// Access multiple props
+console.log(proxyUser.name);
+console.log(proxyUser.age);
+console.log(proxyUser.city);
 
-    while (current) {
-      let next = current.next;
-      current.next = prev;
-      prev = current;
-      current = next;
-    }
-  
-    this.head = prev
-  }
-  print() {
-    let output = "";
-    let current = this.head;
+// Modify multiple props
+proxyUser.age = 25;
+proxyUser.city = "Kochi";
+proxyUser.country = "India";
 
-    while (current) {
-      output += current.data + " -> ";
-      current = current.next;
-    }
-    return output;
-  }
-}
+// Test validation
+proxyUser.age = "Twenty-six"; // Should fail
 
-// Example usage
-
-const myList = new List();
-myList.append(1);
-myList.append(2);
-myList.append(3);
-
-console.log(myList.print()); // Output: 1 -> 2 -> 3 ->
-
-myList.reverse();
-console.log(myList.print()); // Output: 3 -> 2 -> 1 ->
+// what is proxy
+// proxy is a design pattern where we create a proxy object in place of the original object. The proxy object is responsible for handling all the interactions with the original object.

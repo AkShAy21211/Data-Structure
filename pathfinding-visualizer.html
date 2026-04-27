@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pathfinding + RL Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn.active {
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+            transform: scale(1.05);
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 30px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .grid-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .grid {
+            display: inline-grid;
+            gap: 1px;
+            background: #ddd;
+            padding: 1px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cell {
+            width: 25px;
+            height: 25px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .cell:hover {
+            opacity: 0.8;
+        }
+
+        .cell.start {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .cell.end {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .cell.obstacle {
+            background: #2c3e50;
+        }
+
+        .cell.visited {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .cell.path {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            animation: drawPath 0.3s ease-in;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes drawPath {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .instruction {
+            text-align: center;
+            color: #666;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Interactive Pathfinding Visualizer</h1>
+        <p class="subtitle">A* Algorithm with Interactive Grid</p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Cells Visited</div>
+                <div class="stat-value" id="visitedCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Path Length</div>
+                <div class="stat-value" id="pathLength">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Speed</div>
+                <div class="stat-value" id="speed">50ms</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="setMode('start')" id="btnStart">
+                📍 Set Start
+            </button>
+            <button class="btn btn-primary" onclick="setMode('end')" id="btnEnd">
+                🎯 Set End
+            </button>
+            <button class="btn btn-primary active" onclick="setMode('obstacle')" id="btnObstacle">
+                🧱 Draw Walls
+            </button>
+            <button class="btn btn-primary" onclick="setMode('erase')" id="btnErase">
+                🧽 Erase
+            </button>
+            <button class="btn btn-success" onclick="runAStar()">
+                ▶️ Run A*
+            </button>
+            <button class="btn btn-danger" onclick="clearPath()">
+                🧹 Clear Path
+            </button>
+            <button class="btn btn-warning" onclick="resetGrid()">
+                🔄 Reset All
+            </button>
+        </div>
+
+        <div class="controls">
+            <label style="color: #333; display: flex; align-items: center; gap: 10px;">
+                Speed: 
+                <input type="range" min="10" max="200" value="50" id="speedSlider" 
+                       oninput="updateSpeed(this.value)" 
+                       style="width: 150px;">
+            </label>
+        </div>
+
+        <div class="grid-container">
+            <div class="grid" id="grid"></div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"></div>
+                <span>Start Point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);"></div>
+                <span>End Point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #2c3e50;"></div>
+                <span>Obstacle</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                <span>Visited</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);"></div>
+                <span>Path</span>
+            </div>
+        </div>
+
+        <p class="instruction">💡 Click and drag to draw obstacles. Set start/end points, then watch A* find the shortest path!</p>
+    </div>
+
+    <script>
+        const ROWS = 20;
+        const COLS = 35;
+        
+        let grid = [];
+        let start = { row: 10, col: 5 };
+        let end = { row: 10, col: 30 };
+        let mode = 'obstacle';
+        let isDrawing = false;
+        let isRunning = false;
+        let animationSpeed = 50;
+
+        // Initialize grid
+        function initGrid() {
+            const gridElement = document.getElementById('grid');
+            gridElement.style.gridTemplateColumns = `repeat(${COLS}, 25px)`;
+            gridElement.innerHTML = '';
+            grid = [];
+
+            for (let row = 0; row < ROWS; row++) {
+                grid[row] = [];
+                for (let col = 0; col < COLS; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    if (row === start.row && col === start.col) {
+                        cell.classList.add('start');
+                        grid[row][col] = 'start';
+                    } else if (row === end.row && col === end.col) {
+                        cell.classList.add('end');
+                        grid[row][col] = 'end';
+                    } else {
+                        grid[row][col] = 'empty';
+                    }
+
+                    cell.addEventListener('mousedown', (e) => {
+                        e.preventDefault();
+                        isDrawing = true;
+                        handleCellClick(row, col);
+                    });
+
+                    cell.addEventListener('mouseenter', () => {
+                        if (isDrawing) {
+                            handleCellClick(row, col);
+                        }
+                    });
+
+                    gridElement.appendChild(cell);
+                }
+            }
+
+            document.addEventListener('mouseup', () => {
+                isDrawing = false;
+            });
+
+            updateStats();
+        }
+
+        function handleCellClick(row, col) {
+            if (isRunning) return;
+
+            const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            const currentType = grid[row][col];
+
+            if (mode === 'start') {
+                clearCellType('start');
+                cell.className = 'cell start';
+                grid[row][col] = 'start';
+                start = { row, col };
+            } else if (mode === 'end') {
+                clearCellType('end');
+                cell.className = 'cell end';
+                grid[row][col] = 'end';
+                end = { row, col };
+            } else if (mode === 'obstacle') {
+                if (currentType === 'empty' || currentType === 'visited' || currentType === 'path') {
+                    cell.className = 'cell obstacle';
+                    grid[row][col] = 'obstacle';
+                }
+            } else if (mode === 'erase') {
+                if (currentType === 'obstacle' || currentType === 'visited' || currentType === 'path') {
+                    cell.className = 'cell';
+                    grid[row][col] = 'empty';
+                }
+            }
+        }
+
+        function clearCellType(type) {
+            for (let row = 0; row < ROWS; row++) {
+                for (let col = 0; col < COLS; col++) {
+                    if (grid[row][col] === type) {
+                        const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                        cell.className = 'cell';
+                        grid[row][col] = 'empty';
+                    }
+                }
+            }
+        }
+
+        function setMode(newMode) {
+            mode = newMode;
+            document.querySelectorAll('.controls .btn-primary').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`btn${newMode.charAt(0).toUpperCase() + newMode.slice(1)}`).classList.add('active');
+        }
+
+        function updateSpeed(value) {
+            animationSpeed = 210 - parseInt(value);
+            document.getElementById('speed').textContent = `${animationSpeed}ms`;
+        }
+
+        // A* Algorithm
+        class PriorityQueue {
+            constructor() {
+                this.values = [];
+            }
+
+            enqueue(val, priority) {
+                this.values.push({ val, priority });
+                this.sort();
+            }
+
+            dequeue() {
+                return this.values.shift();
+            }
+
+            sort() {
+                this.values.sort((a, b) => a.priority - b.priority);
+            }
+
+            isEmpty() {
+                return this.values.length === 0;
+            }
+        }
+
+        function heuristic(pos1, pos2) {
+            return Math.abs(pos1.row - pos2.row) + Math.abs(pos1.col - pos2.col);
+        }
+
+        function getNeighbors(node) {
+            const neighbors = [];
+            const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+            for (const [dr, dc] of directions) {
+                const newRow = node.row + dr;
+                const newCol = node.col + dc;
+
+                if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS && grid[newRow][newCol] !== 'obstacle') {
+                    neighbors.push({ row: newRow, col: newCol });
+                }
+            }
+
+            return neighbors;
+        }
+
+        function reconstructPath(cameFrom, current) {
+            const path = [];
+            while (cameFrom.has(`${current.row},${current.col}`)) {
+                path.unshift(current);
+                current = cameFrom.get(`${current.row},${current.col}`);
+            }
+            return path;
+        }
+
+        async function runAStar() {
+            if (isRunning) return;
+            isRunning = true;
+            clearPath();
+
+            const openSet = new PriorityQueue();
+            const cameFrom = new Map();
+            const gScore = new Map();
+            const fScore = new Map();
+            const visited = [];
+
+            const startKey = `${start.row},${start.col}`;
+            const endKey = `${end.row},${end.col}`;
+
+            gScore.set(startKey, 0);
+            fScore.set(startKey, heuristic(start, end));
+            openSet.enqueue(start, fScore.get(startKey));
+
+            while (!openSet.isEmpty()) {
+                const current = openSet.dequeue().val;
+                const currentKey = `${current.row},${current.col}`;
+
+                if (currentKey === endKey) {
+                    const path = reconstructPath(cameFrom, current);
+                    await animatePath(path);
+                    updateStats(visited.length, path.length);
+                    isRunning = false;
+                    return;
+                }
+
+                visited.push(current);
+                
+                if (grid[current.row][current.col] !== 'start' && grid[current.row][current.col] !== 'end') {
+                    const cell = document.querySelector(`[data-row="${current.row}"][data-col="${current.col}"]`);
+                    cell.classList.add('visited');
+                    grid[current.row][current.col] = 'visited';
+                }
+
+                await new Promise(resolve => setTimeout(resolve, animationSpeed));
+
+                const neighbors = getNeighbors(current);
+
+                for (const neighbor of neighbors) {
+                    const neighborKey = `${neighbor.row},${neighbor.col}`;
+                    const tentativeGScore = gScore.get(currentKey) + 1;
+
+                    if (!gScore.has(neighborKey) || tentativeGScore < gScore.get(neighborKey)) {
+                        cameFrom.set(neighborKey, current);
+                        gScore.set(neighborKey, tentativeGScore);
+                        fScore.set(neighborKey, tentativeGScore + heuristic(neighbor, end));
+                        openSet.enqueue(neighbor, fScore.get(neighborKey));
+                    }
+                }
+
+                updateStats(visited.length, 0);
+            }
+
+            alert('No path found!');
+            isRunning = false;
+        }
+
+        async function animatePath(path) {
+            for (const node of path) {
+                if (grid[node.row][node.col] !== 'start' && grid[node.row][node.col] !== 'end') {
+                    const cell = document.querySelector(`[data-row="${node.row}"][data-col="${node.col}"]`);
+                    cell.classList.remove('visited');
+                    cell.classList.add('path');
+                    grid[node.row][node.col] = 'path';
+                    await new Promise(resolve => setTimeout(resolve, animationSpeed / 2));
+                }
+            }
+        }
+
+        function clearPath() {
+            for (let row = 0; row < ROWS; row++) {
+                for (let col = 0; col < COLS; col++) {
+                    if (grid[row][col] === 'visited' || grid[row][col] === 'path') {
+                        const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                        cell.className = 'cell';
+                        grid[row][col] = 'empty';
+                    }
+                }
+            }
+            updateStats();
+        }
+
+        function resetGrid() {
+            start = { row: 10, col: 5 };
+            end = { row: 10, col: 30 };
+            initGrid();
+        }
+
+        function updateStats(visited = 0, pathLen = 0) {
+            document.getElementById('visitedCount').textContent = visited;
+            document.getElementById('pathLength').textContent = pathLen;
+        }
+
+        // Initialize on load
+        initGrid();
+    </script>
+</body>
+</html>

@@ -44,3 +44,9 @@ reverseQueue(queue);
 
 console.log("Reversed Queue:");
 queue.print();
+var MinStack = function () {
+    this.stack = [];
+    this.top = null
+
+};
+

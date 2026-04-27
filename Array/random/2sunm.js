@@ -13,3 +13,8 @@ function twoSum(nums, targer) {
 
 //test
 console.log(twoSum([2, 7, 11, 15], 9));
+
+// complexity
+
+// time complexity: O(n)
+// space complexity: O(n)

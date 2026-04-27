@@ -2,18 +2,16 @@ function isValidParentheses(s) {
     const stack = [];
     const bracketPairs = { '(': ')', '{': '}', '[': ']' };
 
-    for (let char of s) {
-      if (bracketPairs[char]) {
+    for( let char of s){
+      if(bracketPairs[char]){
         stack.push(char);
-      } else {
-        if (bracketPairs[stack.pop()] !== char) {
-          return "unbalanced";
-        }
+      }else{
+        const top = stack.pop();
+        if(bracketPairs[top] !== char) return false;
       }
     }
-  
-    return "balanced";
-  }
+    return stack.length === 0;
+}
   
   // Example usage:
   console.log(isValidParentheses("(()()[[[[{}]]]])"));  // Output: true
