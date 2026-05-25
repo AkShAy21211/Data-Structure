@@ -9,12 +9,11 @@ Object.preventExtensions(obj)
 Object.isSealed(obj) // true
 Object.isFrozen(obj) // true
 Object.isExtensible(obj) // false
-console.log(obj)
 obj.name = 'updated-package'
 obj.version = '1.1.0'
 
 obj.license = 'MIT'
-console.log(obj)
+
 
 // explain all the methods used above
 
@@ -26,3 +25,12 @@ console.log(obj)
 5. Object.isFrozen(obj): This method checks if the object is frozen. It returns true if the object is frozen, otherwise   false.
 6. Object.isExtensible(obj): This method checks if the object is extensible. It returns true if the object is extensible, otherwise false
 */
+
+var a = 10;
+
+function test() {
+  console.log(a);
+
+  var a = 20;
+}
+test(); // Output: undefined
