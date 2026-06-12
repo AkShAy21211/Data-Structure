@@ -1,53 +1,61 @@
-# Data-Structure Repository
+# Data Structures & Algorithms
 
-## Overview
-This repository contains implementations and problem sets related to various data structures and algorithms. It is intended as a resource for learning, practicing, and improving problem-solving skills in data structures and algorithms.
+Personal DSA practice repository — implementations and problem solutions in JavaScript, covering all core topics for SDE interviews.
 
-## Contents
-The repository is structured into different categories based on data structures and algorithmic techniques. Each folder contains relevant problems and solutions:
+## Topics covered
 
-- **Array**: Problems related to arrays, including searching, sorting, and pattern-based questions.
-- **Binary Search Tree**: Problems focused on Binary Search Trees (BST) including insertion, deletion, and traversal.
-- **Binary & Linear Search**: Implementation and problems on both binary search and linear search algorithms.
-- **DFS and BFS**: Depth-First Search (DFS) and Breadth-First Search (BFS) problems for graphs and trees.
-- **Graph**: Graph-related problems including traversal, shortest path, and cycle detection.
-- **Linked List**: Questions on singly and doubly linked lists, including operations and problem-solving.
-- **Numbers**: Mathematical and numerical computation problems.
-- **Recursion**: Problems that involve recursive solutions.
-- **Sorting**: Various sorting algorithm implementations like merge sort, quick sort, and heap sort.
-- **Stack**: Problems on stack operations, including next greater element and balanced parentheses.
-- **Queue**: Queue-related problems including circular queues and priority queues.
-- **Hash Table**: Implementation and problem-solving using hash tables.
-- **Heap**: Heap-based problems including heap sort and priority queue implementations.
-- **Trie**: Problems related to the Trie data structure for efficient string manipulations.
-- **Tree**: General tree-based problems including traversal, Lowest Common Ancestor (LCA), and diameter of a tree.
+| Topic | Status |
+|---|---|
+| Arrays | ✅ |
+| Strings | ✅ |
+| Hash Tables | ✅ |
+| Linked Lists | ✅ |
+| Stacks & Queues | ✅ |
+| Recursion | ✅ |
+| Binary Search | ✅ |
+| Sorting (Bubble, Merge, Quick, Heap, Radix) | ✅ |
+| Trees & BST | ✅ |
+| Heaps | ✅ |
+| Graphs (DFS, BFS) | ✅ |
+| Tries | ✅ |
+| Dynamic Programming | 🔄 In progress |
 
-## Setup
-To use the repository locally:
+## Structure
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/AkShAy21211/Data-Structure.git
-   ```
-2. Navigate into the directory:
-   ```sh
-   cd Data-Structure
-   ```
-3. Ensure Node.js is installed if running JavaScript solutions.
-4. Run JavaScript files:
-   ```sh
-   node index.js
-   ```
+```
+Docs/           → reference slides and framework documentation
+Array/          → array manipulation, sliding window, two pointers
+Linked List/    → singly & doubly linked list operations
+Stack/          → stack problems (balanced parens, next greater element)
+Queue/          → circular queue, priority queue
+Hash Table/     → hash map problems
+Tree/           → traversal, LCA, diameter
+Binary Search Tree/ → insertion, deletion, search
+Heap/           → heap sort, priority queue
+Trie/           → autocomplete, prefix search
+Sorting/        → merge sort, quick sort, heap sort, radix sort
+DFS and BFS/    → graph traversal
+Recursion/      → classic recursive problems
+Search/         → search algorithm implementations
+```
 
-## Contribution
-If you would like to contribute, feel free to create a pull request with your changes. Ensure your code follows best practices and is well-documented.
+## Naming Conventions
 
-## License
-This repository is open-source and available for educational purposes. Feel free to use and modify the code as needed.
+- **Folders:** Standard Title Case (e.g., `Binary Search Tree`, `Hash Table`).
+- **Files:** Standard JavaScript `camelCase` (e.g., `binarySearchTree.js`, `twoSum.js`, `selectionSort.js`).
 
-## Contact
-For any queries or suggestions, reach out via GitHub issues.
+## How to run
 
----
-Happy coding! 🚀
+```bash
+git clone https://github.com/AkShAy21211/Data-Structure.git
+cd Data-Structure
+node <filename>.js
+```
 
+Node.js required. No external dependencies.
+
+## Progress tracker
+
+Actively solving problems from the NeetCode Blind 75 sheet. Solutions are written for clarity — each file includes the problem statement and time/space complexity in comments.
+
+**LeetCode profile:** [achu2002](https://leetcode.com/u/achu2002/)

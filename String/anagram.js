@@ -101,7 +101,7 @@ function groupAnagrams2(strs) {
 // - remove punctuation
 // - unicode safe
 let s ='fdg'
-Zfunction normalize(str, { spaces = "collapse", punctuation = true } = {}) {
+function normalize(str, { spaces = "collapse", punctuation = true } = {}) {
   let s = str.normalize();  // unicode normalization
   s = s.toLowerCase();
 
