@@ -4,21 +4,19 @@ Personal DSA practice repository — implementations and problem solutions in Ja
 
 ## Topics covered
 
-| Topic | Status |
-|---|---|
-| Arrays | ✅ |
-| Strings | ✅ |
-| Hash Tables | ✅ |
-| Linked Lists | ✅ |
-| Stacks & Queues | ✅ |
-| Recursion | ✅ |
-| Binary Search | ✅ |
-| Sorting (Bubble, Merge, Quick, Heap, Radix) | ✅ |
-| Trees & BST | ✅ |
-| Heaps | ✅ |
-| Graphs (DFS, BFS) | ✅ |
-| Tries | ✅ |
-| Dynamic Programming | 🔄 In progress |
+- Arrays
+- Strings
+- Hash Tables
+- Linked Lists
+- Stacks & Queues
+- Recursion
+- Binary Search
+- Sorting (Bubble, Merge, Quick, Heap, Radix)
+- Trees & BST
+- Heaps
+- Graphs (DFS, BFS)
+- Tries
+- Dynamic Programming
 
 ## Structure
 
